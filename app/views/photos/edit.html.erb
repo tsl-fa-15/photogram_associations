@@ -16,6 +16,10 @@
     <input id="photo_image_url" class="form-control" type="text" name="the_source" value="<%= @photo.source %>">
   </div>
   <div class="form-group">
+      <label for="user_id">User:</label>
+      <%= select_tag(:user_id, options_from_collection_for_select(@users, :id, :name, @photo.user_id), class: 'form-control', include_blank: true) %>
+    </div>
+  <div class="form-group">
     <input class="btn btn-default" type="submit" value="Update photo">
   </div>
 <% end %>

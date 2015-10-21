@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'faker'
 gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators", :branch => "panels"
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 

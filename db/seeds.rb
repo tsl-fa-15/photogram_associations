@@ -6,6 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.destroy_all
+
+3.times do
+  u = User.new
+  u.name = Faker::Name.name
+  first_name = u.name.split(" ").first
+  u.email = Faker::Internet.email(first_name)
+  u.image_url = Faker::Avatar.image(u.name)
+  u.save
+end
+
+puts "There are #{User.count} users in the database"
+
+
+Photo.destroy_all
+
 photo_info = [
   {
     :source => "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Lake_Bondhus_Norway_2862.jpg/1280px-Lake_Bondhus_Norway_2862.jpg",
@@ -38,9 +54,13 @@ photo_info = [
 ]
 
 photo_info.each do |photo_hash|
+  random_num = rand(User.count)
+  random_user = User.offset(random_num).first
+
   p = Photo.new
   p.source = photo_hash[:source]
   p.caption = photo_hash[:caption]
+  p.user_id = random_user.id
   p.save
 end
 

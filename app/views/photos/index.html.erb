@@ -1,25 +1,41 @@
 <% @photos.each do |photo| %>
-  <div class="well">
-    <div class="thumbnail">
-      <img alt="<%= photo.caption %>" class="img-responsive" src="<%= photo.source %>">
-      <div class="caption">
-        <p class="lead"><%= photo.caption %></p>
-        <p>
-          <%= link_to photo_path(photo.id), :class => "btn btn-primary" do %>
-            <i class="fa fa-search-plus"></i>
-          <% end %>
-          <a class="btn btn-success" href="//htmlpreview.github.io/?https://github.com/boothappdev/bootstrap_exercises/blob/master/photogram/solution.html#">
-            <i class="fa fa-heart-o"></i>
-          </a>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      <div class="media">
+        <%= link_to user_path(photo.user.id) do %>
+          <img class="media-object" width="100px" src="<%= photo.user.image_url %>" alt="">
+        <% end %>
+        <div class="media-body">
+          <h4 class="media-heading"><%= photo.user.name %></h4>
+          created <%= time_ago_in_words photo.created_at %> ago
+        </div>
+      </div>
 
-          <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
-            <i class="fa fa-edit"></i>
-          <% end %>
 
-          <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
-            <i class="fa fa-trash-o"></i>
-          <% end %>
-        </p>
+
+    </div>
+    <div class="well col-md-6">
+      <div class="thumbnail">
+        <img alt="<%= photo.caption %>" class="img-responsive" src="<%= photo.source %>">
+        <div class="caption">
+          <p class="lead"><%= photo.caption %></p>
+          <p>
+            <%= link_to photo_path(photo.id), :class => "btn btn-primary" do %>
+              <i class="fa fa-search-plus"></i>
+            <% end %>
+            <a class="btn btn-success" href="//htmlpreview.github.io/?https://github.com/boothappdev/bootstrap_exercises/blob/master/photogram/solution.html#">
+              <i class="fa fa-heart-o"></i>
+            </a>
+
+            <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+
+            <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
+              <i class="fa fa-trash-o"></i>
+            <% end %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
