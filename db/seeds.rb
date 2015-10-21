@@ -65,3 +65,23 @@ photo_info.each do |photo_hash|
 end
 
 puts "There are now #{Photo.count} photos in the database."
+
+Comment.destroy_all
+
+20.times do
+  user_random_num = rand(User.count)
+  random_user = User.offset(user_random_num).first
+
+  photo_random_num = rand(Photo.count)
+  random_photo = Photo.offset(photo_random_num).first
+
+  c = Comment.new
+  c.user_id = random_user.id
+  c.photo_id = random_photo.id
+  c.contents = Faker::Hacker.say_something_smart
+  c.save
+end
+
+puts "There are now #{Comment.count} comments in the database."
+
+

@@ -5,4 +5,9 @@ class Photo < ActiveRecord::Base
   def user
     User.find(user_id)
   end
+
+  def comments
+    Comment.where(photo_id: id)
+  end
 end
+

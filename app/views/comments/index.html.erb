@@ -27,10 +27,10 @@
       <div class="panel-body">
         <dl>
           <dt>User</dt>
-          <dd><%= comment.user_id %></dd>
+          <dd><%= link_to comment.user.name, comment.user %></dd>
 
           <dt>Photo</dt>
-          <dd><%= comment.photo_id %></dd>
+          <dd><%= link_to comment.photo.caption, comment.photo %></dd>
 
           <dt>Contents</dt>
           <dd><%= comment.contents %></dd>
