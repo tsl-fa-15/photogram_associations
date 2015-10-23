@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   def show
     @photo = Photo.find(params['id'])
   end

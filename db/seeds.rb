@@ -14,6 +14,8 @@ User.destroy_all
   first_name = u.name.split(" ").first
   u.email = Faker::Internet.email(first_name)
   u.image_url = Faker::Avatar.image(u.name)
+  u.password = '12341234'
+  u.password_confirmation = '12341234'
   u.save
 end
 
