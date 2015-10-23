@@ -23,10 +23,16 @@
             <%= link_to photo_path(photo.id), :class => "btn btn-primary" do %>
               <i class="fa fa-search-plus"></i>
             <% end %>
-            <a class="btn btn-success" href="//htmlpreview.github.io/?https://github.com/boothappdev/bootstrap_exercises/blob/master/photogram/solution.html#">
-              <i class="fa fa-heart-o"></i>
-            </a>
-
+            <% favorite = Favorite.where(user_id: 7, photo_id: photo.id).first %>
+            <% if favorite.present? %>
+              <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite'  do %>
+                <i class="fa fa-heart"></i> Unfavorite
+              <% end %>
+            <% else %>
+              <%= link_to new_favorite_path, class: 'btn btn-success' do %>
+                <i class="fa fa-heart-o"></i>
+              <% end %>
+            <% end %>
             <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
               <i class="fa fa-edit"></i>
             <% end %>

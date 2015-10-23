@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  # Routes for the Favorite resource:
+  # CREATE
+  get '/favorites/new',      :controller => 'favorites', :action => 'new',    :as => 'new_favorite'
+  post '/favorites',         :controller => 'favorites', :action => 'create', :as => 'favorites'
+
+  # READ
+  get '/favorites',          :controller => 'favorites', :action => 'index'
+  get '/favorites/:id',      :controller => 'favorites', :action => 'show',   :as => 'favorite'
+
+  # UPDATE
+  get '/favorites/:id/edit', :controller => 'favorites', :action => 'edit',   :as => 'edit_favorite'
+  patch '/favorites/:id',    :controller => 'favorites', :action => 'update'
+
+  # DELETE
+  delete '/favorites/:id',   :controller => 'favorites', :action => 'destroy'
+  #------------------------------
+
   # Routes for the Comment resource:
   # CREATE
   get '/comments/new',      :controller => 'comments', :action => 'new',    :as => 'new_comment'
