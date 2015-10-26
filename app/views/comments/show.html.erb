@@ -24,11 +24,13 @@
               <%= link_to comments_url, :class => "btn btn-primary" do %>
                 <i class="fa fa-chevron-left"></i>
               <% end %>
-              <%= link_to edit_comment_url(@comment.id), :class => "btn btn-warning" do %>
-                <i class="fa fa-edit"></i>
-              <% end %>
-              <%= link_to comment_url(@comment.id), :method => "delete", :data => { :confirm => "Do you really want to delete this comment?" }, :class => "btn btn-danger" do %>
-                <i class="fa fa-trash-o"></i>
+              <% if current_user.id == @comment.user_id %>
+                <%= link_to edit_comment_url(@comment.id), :class => "btn btn-warning" do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+                <%= link_to comment_url(@comment.id), :method => "delete", :data => { :confirm => "Do you really want to delete this comment?" }, :class => "btn btn-danger" do %>
+                  <i class="fa fa-trash-o"></i>
+                <% end %>
               <% end %>
             </div>
           </div>

@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :check_if_owner]
+  before_action :check_if_owner, only: [:edit, :update, :destroy]
+
   def index
     @comments = Comment.all
   end
 
   def show
-    @comment = Comment.find(params[:id])
   end
 
   def new
@@ -25,11 +27,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
 
     @comment.user_id = params[:user_id]
     @comment.photo_id = params[:photo_id]
@@ -43,10 +43,19 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
 
     @comment.destroy
 
     redirect_to comments_url, :notice => "Comment deleted."
+  end
+
+  def check_if_owner
+    if current_user.id != @comment.user_id
+      redirect_to root_url, notice: "You must be the owner to do that"
+    end
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end

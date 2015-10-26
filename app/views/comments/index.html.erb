@@ -19,37 +19,40 @@
 
 <div class="row isotope-container">
 <% @comments.each do |comment| %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comment #<%= comment.id %></h3>
-      </div>
-      <div class="panel-body">
-        <dl>
-          <dt>User</dt>
-          <dd><%= link_to comment.user.name, comment.user %></dd>
+  <% if current_user.id == comment.user_id %>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Comment #<%= comment.id %></h3>
+        </div>
+        <div class="panel-body">
+          <dl>
+            <dt>User</dt>
+            <dd><%= link_to comment.user.name, comment.user %></dd>
 
-          <dt>Photo</dt>
-          <dd><%= link_to comment.photo.caption, comment.photo %></dd>
+            <dt>Photo</dt>
+            <dd><%= link_to comment.photo.caption, comment.photo %></dd>
 
-          <dt>Contents</dt>
-          <dd><%= comment.contents %></dd>
+            <dt>Contents</dt>
+            <dd><%= comment.contents %></dd>
 
-        </dl>
-        <div class="btn-group btn-group-justified">
-          <%= link_to comment_url(comment), :class => "btn btn-primary" do %>
-            <i class="fa fa-search-plus"></i>
-          <% end %>
-          <%= link_to edit_comment_url(comment), :class => "btn btn-warning" do %>
-            <i class="fa fa-edit"></i>
-          <% end %>
-          <%= link_to comment_url(comment), :method => "delete", :data => { :confirm => "Do you really want to delete this comment?" }, :class => "btn btn-danger" do %>
-            <i class="fa fa-trash-o"></i>
-          <% end %>
+          </dl>
+          <div class="btn-group btn-group-justified">
+            <%= link_to comment_url(comment), :class => "btn btn-primary" do %>
+              <i class="fa fa-search-plus"></i>
+            <% end %>
+
+              <%= link_to edit_comment_url(comment), :class => "btn btn-warning" do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
+              <%= link_to comment_url(comment), :method => "delete", :data => { :confirm => "Do you really want to delete this comment?" }, :class => "btn btn-danger" do %>
+                <i class="fa fa-trash-o"></i>
+              <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 </div>
 
