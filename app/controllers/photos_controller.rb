@@ -1,5 +1,7 @@
 class PhotosController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :check_if_owner, only: [:edit, :update, :destroy]
+
   def show
     @photo = Photo.find(params['id'])
   end
@@ -54,6 +56,13 @@ class PhotosController < ApplicationController
   def index
     @photos = Photo.all
     @comment = Comment.new
+  end
+
+  def check_if_owner
+    @photo = Photo.find(params[:id])
+    if current_user.id != @photo.user_id
+      redirect_to photos_url, notice: "You must be the owner to do that"
+    end
   end
 end
 

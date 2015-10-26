@@ -33,12 +33,14 @@
                 <i class="fa fa-heart-o"></i>
               <% end %>
             <% end %>
-            <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
-              <i class="fa fa-edit"></i>
-            <% end %>
+            <% if current_user.id == photo.user_id %>
+              <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
+                <i class="fa fa-edit"></i>
+              <% end %>
 
-            <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
-              <i class="fa fa-trash-o"></i>
+              <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
+                <i class="fa fa-trash-o"></i>
+              <% end %>
             <% end %>
           </p>
         </div>
