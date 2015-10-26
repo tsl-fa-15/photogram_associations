@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  validates :user_id, :photo_id, presence: true
+
   def user
     User.find(user_id)
   end
