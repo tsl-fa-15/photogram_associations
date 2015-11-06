@@ -19,7 +19,7 @@ class FavoritesController < ApplicationController
     if @favorite.save
       respond_to do |format|
         format.html {redirect_to photos_url, :notice => "Favorite created successfully."}
-        format.js {render 'create'}
+        format.js {render 'render_favorite_button' }
       end
     else
       render 'new'
@@ -48,6 +48,9 @@ class FavoritesController < ApplicationController
 
     @favorite.destroy
 
-    redirect_to photos_url, :notice => "Favorite deleted."
+    respond_to do |format|
+      format.html {redirect_to photos_url, :notice => "Favorite deleted."}
+      format.js { render 'render_favorite_button' }
+    end
   end
 end

@@ -2,7 +2,7 @@
 
 <div id="photo_<%= photo.id %>_favorite_container" class="favorite-container">
   <% if favorite.present? %>
-    <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite'  do %>
+    <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite', remote: true  do %>
       <i class="fa fa-heart"></i> Unfavorite
     <% end %>
   <% else %>
