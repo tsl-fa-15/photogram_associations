@@ -45,18 +45,11 @@
           </p>
         </div>
       </div>
-      <% photo.comments.each do |comment| %>
-        <div class="media">
-          <div class="media-left">
-            <a href="#">
-              <img class="media-object" width="50px" src="<%= comment.user.image_url %>" alt="<%= comment.user.name %>">
-            </a>
-          </div>
-          <div class="media-body">
-            <%= comment.contents %>
-          </div>
-        </div>
-      <% end %>
+      <div id="photo_<%= photo.id %>_comment_list">
+        <% photo.comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
+        <% end %>
+      </div>
 
       <!-- Validation failure messages -->
 
@@ -74,7 +67,7 @@
       <div class="row">
         <div class="col-md-12">
           <% if user_signed_in? %>
-            <%= form_tag comments_url, :method => "post", :class => "form-horizontal" do %>
+            <%= form_tag comments_url, :method => "post", :class => "form-horizontal", remote: true do %>
               <!-- Label and input for user_id -->
               <div class="form-group">
                 <div class="col-sm-10">

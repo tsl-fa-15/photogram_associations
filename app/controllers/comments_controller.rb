@@ -20,7 +20,11 @@ class CommentsController < ApplicationController
     @comment.contents = params[:contents]
 
     if @comment.save
-      redirect_to photos_url, :notice => "Comment created successfully."
+      respond_to do |format|
+        format.html {redirect_to photos_url, :notice => "Comment created successfully."}
+        format.js {render 'create'}
+
+      end
     else
       render 'new'
     end
