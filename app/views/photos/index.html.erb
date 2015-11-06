@@ -19,30 +19,34 @@
         <img alt="<%= photo.caption %>" class="img-responsive" src="<%= photo.source %>">
         <div class="caption">
           <p class="lead"><%= photo.caption %></p>
-          <p>
-            <%= link_to photo_path(photo.id), :class => "btn btn-primary" do %>
-              <i class="fa fa-search-plus"></i>
-            <% end %>
-            <% favorite = Favorite.where(user_id: 7, photo_id: photo.id).first %>
-            <% if favorite.present? %>
-              <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite'  do %>
-                <i class="fa fa-heart"></i> Unfavorite
+            <% if current_user %>
+              <%= link_to photo_path(photo.id), :class => "btn btn-primary" do %>
+                <i class="fa fa-search-plus"></i>
               <% end %>
-            <% else %>
-              <%= link_to new_favorite_path, class: 'btn btn-success' do %>
-                <i class="fa fa-heart-o"></i>
+              <% favorite = Favorite.where(user_id: current_user.id, photo_id: photo.id).first %>
+              <% if favorite.present? %>
+                <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite'  do %>
+                  <i class="fa fa-heart"></i> Unfavorite
+                <% end %>
+              <% else %>
+                <%= form_tag favorites_path, class: 'inline-form' do %>
+                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                  <input type="hidden" name="photo_id" value="<%= photo.id %>">
+                  <button class="btn btn-success">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                <% end %>
               <% end %>
-            <% end %>
-            <% if current_user.id == photo.user_id %>
-              <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
-                <i class="fa fa-edit"></i>
-              <% end %>
+              <% if current_user.id == photo.user_id %>
+                <%= link_to edit_photo_path(photo.id), :class => "btn btn-warning" do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
 
-              <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fa fa-trash-o"></i>
+                <%= link_to photo_path(photo.id), :class => "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="fa fa-trash-o"></i>
+                <% end %>
               <% end %>
             <% end %>
-          </p>
         </div>
       </div>
       <div id="photo_<%= photo.id %>_comment_list">

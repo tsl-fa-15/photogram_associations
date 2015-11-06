@@ -17,3 +17,8 @@
 body {
   padding-top: 60px;
 }
+
+
+.inline-form {
+  display: inline-block;
+}
