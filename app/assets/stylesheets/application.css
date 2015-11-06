@@ -22,3 +22,7 @@ body {
 .inline-form {
   display: inline-block;
 }
+
+.favorite-container {
+  display: inline-block;
+}

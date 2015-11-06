@@ -17,7 +17,10 @@ class FavoritesController < ApplicationController
     @favorite.photo_id = params[:photo_id]
 
     if @favorite.save
-      redirect_to photos_url, :notice => "Favorite created successfully."
+      respond_to do |format|
+        format.html {redirect_to photos_url, :notice => "Favorite created successfully."}
+        format.js {render 'create'}
+      end
     else
       render 'new'
     end

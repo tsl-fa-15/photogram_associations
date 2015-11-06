@@ -1,0 +1,17 @@
+<% favorite = Favorite.where(user_id: current_user.id, photo_id: photo.id).first %>
+
+<div id="photo_<%= photo.id %>_favorite_container" class="favorite-container">
+  <% if favorite.present? %>
+    <%= link_to favorite_path(favorite.id), method: :delete, class: 'btn btn-success', title: 'Unfavorite'  do %>
+      <i class="fa fa-heart"></i> Unfavorite
+    <% end %>
+  <% else %>
+    <%= form_tag favorites_path, class: 'inline-form', remote: true do %>
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+      <input type="hidden" name="photo_id" value="<%= photo.id %>">
+      <button class="btn btn-success">
+        <i class="fa fa-heart-o"></i>
+      </button>
+    <% end %>
+  <% end %>
+</div>
